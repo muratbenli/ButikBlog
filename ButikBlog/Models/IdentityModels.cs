@@ -26,7 +26,7 @@ namespace ButikBlog.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("name=ApplicationDbContext", throwIfV1Schema: false)
         {
         }
 
@@ -37,6 +37,8 @@ namespace ButikBlog.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             //bire çoklu ilişkilerde ilişkili satirlarin silinmesini silen convention ı kaldırdık
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }

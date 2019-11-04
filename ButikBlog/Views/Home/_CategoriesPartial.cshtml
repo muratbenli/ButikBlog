@@ -1,0 +1,17 @@
+﻿@model List<Category>
+
+
+
+<h4 class="font-italic">Kategoriler</h4>
+
+<ol class="list-unstyled mb-0">
+    <li>
+        <a href="@Url.Action("Index","Home")">Tüm Yazılar</a>
+    </li>
+
+    @foreach (var item in Model)
+    {
+        <li><a href="@Url.Action("Index","Home",new { cid=item.Id})">@item.CategoryName</a></li>
+    }
+
+</ol>
