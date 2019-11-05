@@ -1,22 +1,29 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
+        @Html.ActionLink("Hesabım", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class="btn btn-sm btn-outline-secondary mr-1" })
+
+        <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-sm btn-outline-secondary">Çıkış Yap</a>
+
+       if (User.IsInRole("Admin"))
+	    {
+        <a class="btn btn-sm btn-success ml-1" href="@Url.Action("Index","Dashboard",new { area = "Admin"})">
+            Yönet
+        </a>
+	    }
     }
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+    <a class="btn btn-sm btn-outline-secondary mr-1" href="@Url.Action("Login","Account")">
+        Giriş
+    </a>
+    <a class="btn btn-sm btn-outline-secondary" href="@Url.Action("Register","Account")">
+        Kayıt Ol
+    </a>
 }
+

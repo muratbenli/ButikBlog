@@ -19,7 +19,7 @@ namespace ButikBlog.Migrations
         protected override void Seed(ButikBlog.Models.ApplicationDbContext context)
         {
             //admin tolünün ve kullanýcýsýný oluþtur ve bu kullanýcýya ait yazýlar
-            #region Admin Rolünü ve Kullanýcýsýný Oluþtur
+            #region Admin Rolunu ve Kullanicisini Oluþtur
 
             if (!context.Roles.Any(r => r.Name == "Admin"))
             {
@@ -44,7 +44,7 @@ namespace ButikBlog.Migrations
                 manager.AddToRole(user.Id, "Admin");
 
                 // Oluþturulan bu kullanýcýya ait yazýlar ekleyelim:
-                #region Kategoriler ve Yazýlar
+                #region Kategoriler ve Yazilar
 
                 if (!context.Categories.Any())
                 {
@@ -120,7 +120,7 @@ namespace ButikBlog.Migrations
             #endregion
 
 
-            #region Admin Kullanýcýsýna 77 yeni yazý ekle
+            #region Admin Kullanicisina 77 yeni yazi ekle
 
             if (!context.Categories.Any(x => x.CategoryName == "Diðer"))
             {
