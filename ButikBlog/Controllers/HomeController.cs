@@ -33,10 +33,10 @@ namespace ButikBlog.Controllers
 
             }
 
-            // todo: sayfalar düzeltilecek
-
+            ViewBag.page = page;
+            ViewBag.pageCount = Math.Ceiling(result.Count() / (decimal)pageSize);
             ViewBag.nextPage = page + 1;
-            ViewBag.prevPage = page - 1;
+            ViewBag.prevPage = page - 1 < 2 ? 1 : page - 1;
             ViewBag.cid = cid;
 
             return View(result.OrderByDescending(x => x.CreationTime).Skip((page - 1) * pageSize).Take(pageSize).ToList());
@@ -45,7 +45,6 @@ namespace ButikBlog.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
             return View();
         }
 

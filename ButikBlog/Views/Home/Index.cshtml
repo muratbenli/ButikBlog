@@ -13,13 +13,45 @@
         <h2 class="blog-post-title">@item.Title</h2>
         <p class="blog-post-meta">@item.CreationTime <a href="#"> @item.Author.UserName</a></p>
 
-       @Html.Raw(item.Content)
+        @Html.Raw(item.Content)
     </div><!-- /.blog-post -->
 }
 
 
 
-<nav class="blog-pagination">
-    <a class="btn btn-outline-primary" href="@Url.Action("Index","Home",new { cid= ViewBag.cid, page = ViewBag.prevPage })">Daha Yeni>
-    <a class="btn btn-outline-secondary " href="@Url.Action("Index","Home",new { cid= ViewBag.cid, page = ViewBag.nextPage})" tabindex="-1" aria-disabled="true">Daha Eski</a>
-</nav>
+    <nav class="blog-pagination">
+        @if (ViewBag.page < ViewBag.pageCount)
+        {
+            <a class="btn btn-outline-primary" href="@Url.Action("Index","Home",new
+                                        {
+                                            cid = ViewBag.cid,
+                                            page = ViewBag.nextPage
+                                        })">
+                <i class="fas fa-angle-double-left"></i> Daha Eski
+            </a>
+        }
+        else
+        {
+            <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">
+                <i class="fas fa-angle-double-left"></i> Daha Eski
+            </a>
+        }
+
+        @if (ViewBag.page > 1)
+        {
+            <a class="btn btn-outline-primary " href="@Url.Action("Index","Home",new
+                                           {
+                                               cid = ViewBag.cid,
+                                               page = ViewBag.prevPage
+                                           })">
+                Daha Yeni <i class="fas fa-angle-double-right"></i>
+            </a>
+
+        }
+        else
+        {
+            <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">
+                Daha Yeni <i class="fas fa-angle-double-right"></i>
+            </a>
+        }
+    </nav>

@@ -78,6 +78,8 @@
                     </div>
                 </div>
             </div>*@
+
+        <button onclick="topFunction()" id="myBtn" title="Yukarı Git"><strong><i class="fas fa-angle-double-up"></i></strong></button>
     </div>
 
     <main role="main" class="container">
@@ -93,15 +95,15 @@
                 </div>
 
                 <div class="p-4">
-                   @Html.Action("CategoriesPartial","Home")
+                    @Html.Action("CategoriesPartial", "Home")
                 </div>
 
                 <div class="p-4">
                     <h4 class="font-italic">Elsewhere</h4>
                     <ol class="list-unstyled">
-                        <li><a href="https://linkedin.com/in/murat-benli-361215139">Linkedin</a></li>
-                        <li><a href="https://github.com/muratbenli">GitHub</a></li>
-                        <li><a href="https://www.instagram.com/muratbenl/">Instagram</a></li>
+                        <li><a href="https://linkedin.com/in/murat-benli-361215139"><i class="fab fa-linkedin" style="color:black"></i> Linkedin</a></li>
+                        <li><a href="https://github.com/muratbenli"><i class="fab fa-github" style="color:black"></i> GitHub</a></li>
+                        <li><a href="https://www.instagram.com/muratbenl/"><i class="fab fa-instagram" style="color:black"></i> Instagram</a></li>
                     </ol>
                 </div>
             </aside><!-- /.blog-sidebar -->
@@ -117,6 +119,27 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script>
+        //Get the button
+        var mybutton = document.getElementById("myBtn");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
     @RenderSection("scripts", false)
 </body>
 </html>
