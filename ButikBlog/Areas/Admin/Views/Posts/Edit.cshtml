@@ -1,4 +1,4 @@
-﻿@model Post
+﻿@model PostEditViewModel
 @{
     ViewBag.Title = "Edit";
     ViewBag.HeaderTitle = "Yazıyı Düzenle";
@@ -64,7 +64,7 @@
 
         $(function () {
             //Add text editor
-            $('#Content').summernote()
+            $('#Content').summernote({ lang: "tr-TR" })
         });
     </script>
 }
