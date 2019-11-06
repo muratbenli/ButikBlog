@@ -1929,6 +1929,8 @@
     <Content Include="Areas\Admin\plugins\sweetalert2-theme-bootstrap-4\bootstrap-4.scss" />
     <Content Include="Areas\Admin\plugins\toastr\toastr.js.map" />
     <Content Include="Areas\Admin\Views\Posts\Index.cshtml" />
+    <Content Include="Areas\Admin\plugins\datatables\Turkish.json" />
+    <Content Include="Areas\Admin\Views\Posts\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome\all.js" />
     <Content Include="Scripts\fontawesome\all.min.js" />

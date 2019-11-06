@@ -20,6 +20,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="~/Areas/Admin/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="~/Areas/Admin/dist/css/adminlte.min.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="~/Areas/Admin/plugins/summernote/summernote-bs4.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -34,17 +36,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="index3.html" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Contact</a>
+                    <a href="@Url.Action("Index", "Home", new { area= ""})" class="nav-link">Siteyi Görüntüle</a>
                 </li>
             </ul>
 
             <!-- SEARCH FORM -->
             <form class="form-inline ml-3">
                 <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control form-control-navbar" type="search" placeholder="Ara" aria-label="Ara">
                     <div class="input-group-append">
                         <button class="btn btn-navbar" type="submit">
                             <i class="fas fa-search"></i>
@@ -151,7 +150,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
+            <a href="@Url.Action("Index","Dashboard")" class="brand-link">
                 <img src="~/Areas/Admin/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                      style="opacity: .8">
                 <span class="brand-text font-weight-light">@ViewBag.HeaderTitle</span>
@@ -165,15 +164,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <img src="~/Areas/Admin/dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">@User.Identity.Name</a>
+                        <a href="#" class="d-block">@User.Identity.Name.Substring(0, 14)...</a>
                     </div>
                 </div>
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-                             with font-awesome or any other icon font library -->
+
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index","Dashboard")" class="nav-link active">
+                                <i class="nav-icon fas fa-home"></i>
+                                <p>Anasayfa</p>
+                            </a>
+                        </li>
+
                         <li class="nav-item has-treeview menu-open">
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -182,31 +187,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index","Dashboard")" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Anasayfa</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index","Posts")" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Yazılar</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Simple Link
-                                    <span class="right badge badge-danger">New</span>
-                                </p>
+                            <a href="@Url.Action("Index","Posts")" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Yazılar</p>
                             </a>
                         </li>
                     </ul>
+
+
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>
@@ -265,10 +255,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <footer class="main-footer">
             <!-- To the right -->
             <div class="float-right d-none d-sm-inline">
-                Anything you want
+                Murat Benli
             </div>
             <!-- Default to the left -->
-            <strong>Copyright &copy;2019 ButikBlog |</strong> All rights reserved.
+            <strong>Copyright &copy;2019 ButikBlog |</strong> Tüm hakları saklıdır.
         </footer>
     </div>
     <!-- ./wrapper -->
@@ -280,8 +270,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- DataTables -->
     <script src="~/Areas/Admin/plugins/datatables/jquery.dataTables.js"></script>
     <script src="~/Areas/Admin/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+
     <!-- AdminLTE App -->
     <script src="~/Areas/Admin/dist/js/adminlte.min.js"></script>
+    <!-- Summernote -->
+    <script src="~/Areas/Admin/plugins/summernote/summernote-bs4.min.js"></script>
     @RenderSection("scripts", false)
 </body>
 </html>
