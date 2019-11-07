@@ -21,7 +21,7 @@ else
 
     <div class="form-group">
         <label for="File">Bir fotoğraf seçiniz: </label>
-        <input type="file" class="form-control-file" id="File" name="File">
+        <input type="file" class="form-control-file" id="File" name="File" accept="image/*"/>
         @Html.ValidationMessageFor(x => x.File, null, new { @class = "text-danger" })
     </div>
 

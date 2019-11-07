@@ -174,6 +174,7 @@
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostsController.cs" />
     <Compile Include="Areas\Admin\ViewModels\PostEditViewModel.cs" />
+    <Compile Include="Attributes\ProfilePhotoAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -2032,7 +2033,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\AdminBase\" />
-    <Folder Include="Attributes\" />
     <Folder Include="Upload\Posts\" />
     <Folder Include="Upload\Profiles\" />
     <Folder Include="Views\Base\" />
