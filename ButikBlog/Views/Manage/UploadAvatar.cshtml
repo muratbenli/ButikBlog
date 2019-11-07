@@ -1,0 +1,52 @@
+﻿@model UploadAvatarViewModel
+@{
+    ViewBag.Title = "UploadAvatar";
+}
+
+<h2>Profil Resmi</h2>
+
+@if (string.IsNullOrEmpty(Model.Photo))
+{
+    <img src="~/Images/avatar.jpg" height="150" class="rounded" id="profilePhoto" />
+}
+else
+{
+    <img src="~/Upload/Profiles/@Model.Photo" height="150" class="rounded" id="profilePhoto" />
+}
+
+
+@using (Html.BeginForm("UploadAvatar", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label for="File">Bir fotoğraf seçiniz: </label>
+        <input type="file" class="form-control-file" id="File" name="File">
+        @Html.ValidationMessageFor(x => x.File, null, new { @class = "text-danger" })
+    </div>
+
+    <a href="@Url.Action("Index", "Manage")" class="btn btn-secondary">İptal</a>
+    <button class="btn btn-primary">Gönder</button>
+}
+
+@section scripts {
+    <script>
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#profilePhoto').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#File").change(function () {
+            readURL(this);
+        });
+
+    </script>
+}
