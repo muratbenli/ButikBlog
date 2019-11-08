@@ -2028,13 +2028,13 @@
     <Content Include="webfonts\fa-brands-400.eot" />
     <Content Include="Views\Home\_CategoriesPartial.cshtml" />
     <Content Include="Views\Manage\UploadAvatar.cshtml" />
+    <Content Include="Upload\Posts\.gitkeep" />
+    <Content Include="Upload\Profiles\.gitkeep" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\AdminBase\" />
-    <Folder Include="Upload\Posts\" />
-    <Folder Include="Upload\Profiles\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

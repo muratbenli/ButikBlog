@@ -262,4 +262,13 @@ __pycache__/
 
 
 # Kullanici tarafindan yüklenen resim dosyalari
-Upload
+# Kullanýcýnýn yüklediði fotoðraflar
+# yolun içinde ki herþeyi hariç tut
+
+ButikBlog/Upload/Profiles/*
+ButikBlog/Upload/Posts/*
+
+# exception to the rule
+
+!ButikBlog/Upload/Posts/.gitkeep 
+!ButikBlog/Upload/Profiles/.gitkeep 
