@@ -7,10 +7,14 @@
 
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Yazıları Listele</h3>
+        <a href="@Url.Action("New", "Posts")" class="btn btn-sm btn-primary">
+            <i class="fas fa-plus-circle"></i>
+            Yeni Yazı
+        </a>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
+       
         <table id="example1" class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -86,15 +90,11 @@
         $(function () {
 
             var table = $("#example1").DataTable({
+                order: [[4, "desc"]],
                 language: {
                     url: "@Url.Content("~/Areas/Admin/plugins/datatables/Turkish.json")"
-                },
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true,
+                }
+               
             });
 
             //sil modali gozukurken tetiklenen event

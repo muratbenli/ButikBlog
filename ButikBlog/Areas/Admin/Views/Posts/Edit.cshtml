@@ -1,10 +1,12 @@
 ﻿@model PostEditViewModel
 @{
-    ViewBag.Title = "Edit";
-    ViewBag.HeaderTitle = "Yazıyı Düzenle";
+    var isNew = Model.Id == 0;
+
+    ViewBag.Title = isNew ? "Yeni Yazı" : "Yazıyı Düzenle";
+    ViewBag.HeaderTitle = isNew ? "Yeni Yazı" : "Yazıyı Düzenle";
 }
 
-@using (Html.BeginForm("Edit", "Posts", FormMethod.Post))
+@using (Html.BeginForm(isNew ? "New" : "Edit", "Posts", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(x => x.Id)
@@ -33,16 +35,10 @@
             </div>
             <div class="form-group">
                 @Html.TextAreaFor(x => x.Content,
-                             new { @class = "form-control", placeholder = "İçerik buraya gelecek...", style = "height: 300px" })
+                             new { @class = "form-control" })
                 @Html.ValidationMessageFor(x => x.Content, null, new { @class = "text-danger" })
             </div>
-            @*<div class="form-group">
-                    <div class="btn btn-default btn-file">
-                        <i class="fas fa-paperclip"></i> Attachment
-                        <input type="file" name="attachment">
-                    </div>
-                    <p class="help-block">Max. 32MB</p>
-                </div>*@
+           
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
@@ -64,7 +60,7 @@
 
         $(function () {
             //Add text editor
-            $('#Content').summernote({ lang: "tr-TR" })
+            $('#Content').summernote({ lang: "tr-TR", height: 300, placeholder: "Bir şeyler yazınız.." });
         });
     </script>
 }
