@@ -4,6 +4,12 @@
     ViewBag.HeaderTitle = "Kategoriler";
 }
 
+@if (TempData["successMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["successMessage"]
+    </div>
+}
 
 <div class="card">
     <div class="card-header">
@@ -79,6 +85,11 @@
 @section scripts {
     <script>
         $(function () {
+
+            @if (TempData["successMessage"] != null) {
+                <text>toastr.success("@TempData["successMessage"]"); </text>
+            }
+
 
             var table = $("#example1").DataTable({
                 order: [[1, "asc"]],

@@ -1,4 +1,5 @@
 ﻿using ButikBlog.Areas.Admin.ViewModels;
+using ButikBlog.Attributes;
 using ButikBlog.Models;
 using Microsoft.AspNet.Identity;
 using System;
@@ -12,8 +13,11 @@ using System.Web.Mvc;
 
 namespace ButikBlog.Areas.Admin.Controllers
 {
+    [Breadcrumb("Yazılar")]
     public class PostsController : AdminBaseController
     {
+
+        [Breadcrumb("İndeks")]
         // GET: Admin/Posts
         public ActionResult Index()
         {
@@ -30,6 +34,7 @@ namespace ButikBlog.Areas.Admin.Controllers
             return Json(new { success = true });
         }
 
+        [Breadcrumb("Düzenle")]
         public ActionResult Edit(int id)
         {
             ViewBag.CategoryId = new SelectList(db.Categories.ToList(), "Id", "CategoryName");
@@ -47,6 +52,7 @@ namespace ButikBlog.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
+        [Breadcrumb("Düzenle")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(PostEditViewModel model)
         {
@@ -65,6 +71,7 @@ namespace ButikBlog.Areas.Admin.Controllers
             return View();
         }
 
+        [Breadcrumb("Yeni")]
         public ActionResult New()
         {
             ViewBag.CategoryId = new SelectList(db.Categories.ToList(), "Id", "CategoryName");
@@ -73,6 +80,7 @@ namespace ButikBlog.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Breadcrumb("Düzenle")]
         [ValidateInput(false)]
         public ActionResult New(PostEditViewModel model)
         {
