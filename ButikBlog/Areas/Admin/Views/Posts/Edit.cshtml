@@ -38,7 +38,7 @@
                              new { @class = "form-control" })
                 @Html.ValidationMessageFor(x => x.Content, null, new { @class = "text-danger" })
             </div>
-           
+
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
@@ -60,7 +60,46 @@
 
         $(function () {
             //Add text editor
-            $('#Content').summernote({ lang: "tr-TR", height: 300, placeholder: "Bir şeyler yazınız.." });
+            $('#Content').summernote({
+                lang: "tr-TR",
+                height: 300,
+                placeholder: "Bir şeyler yazınız..",
+
+                // https://stackoverflow.com/questions/21628222/summernote-image-upload
+
+                callbacks: {
+                    onImageUpload: function (files) {
+                        uploadFile(files[0]);  
+                    }
+                }
+            });
+
+            //https://stackoverflow.com/questions/19447435/ajax-upload-image
+            function uploadFile(file) {
+
+                var formData = new FormData();
+                formData.append("file", file);
+
+                $.ajax({
+                    type: 'POST',
+                    url: "@Url.Action("AjaxImageUpload","Posts")",
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        $("#Content").summernote("insertImage", data.url);
+                       
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        console.log("error");
+                        console.log(data);
+                    }
+                });
+            }
+
         });
+
     </script>
 }

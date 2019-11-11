@@ -169,35 +169,78 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
 
                 <!-- Sidebar Menu -->
+                <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
                         <li class="nav-item">
-                            <a href="@Url.Action("Index","Dashboard")" class="nav-link">
+                            <a href="@Url.Action("Index", "Dashboard")" class="nav-link">
                                 <i class="nav-icon fas fa-home"></i>
-                                <p>Anasayfa</p>
+                                <p>
+                                    Anasayfa
+                                </p>
                             </a>
+                        </li>
+                        <!-- Add icons to the links using the .nav-icon class
+                        with font-awesome or any other icon font library -->
+                        <li class="nav-item has-treeview menu-open">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-feather"></i>
+                                <p>
+                                    Yazılar
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("New", "Posts")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Yeni Yazı</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Posts")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Yazıları Listele</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
 
                         <li class="nav-item has-treeview menu-open">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-list"></i>
+                                <i class="fas fa-th-list"></i>
                                 <p>
-                                    Yönetim
+                                    Kategoriler
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
-
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("New", "Categories")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Yeni Kategori Ekle</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Categories")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Kategorileri Listele</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         <li class="nav-item">
-                            <a href="@Url.Action("Index","Posts")" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Yazılar</p>
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Simple Link
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
                             </a>
                         </li>
                     </ul>
-
-
                 </nav>
+                <!-- /.sidebar-menu -->
                 <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->
