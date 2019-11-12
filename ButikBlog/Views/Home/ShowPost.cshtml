@@ -8,7 +8,103 @@
     <p class="blog-post-meta">@Model.CreationTime <a href="#"> @Model.Author.UserName</a></p>
 
 
-@Html.ShowPost(Model.Content)
-    
-</div><!-- /.blog-post -->
+    @Html.ShowPost(Model.Content)
 
+</div><!-- /.blog-post -->
+<!-- Comments Form -->
+@*https://blackrockdigital.github.io/startbootstrap-blog-post/*@
+
+<div class="card my-4">
+    <h5 class="card-header"><i class="fas fa-comments"></i> Yorum Yap:</h5>
+    <div class="card-body">
+        <form id="commentForm" name="commentForm">
+            @Html.AntiForgeryToken()
+            @Html.Hidden("ParentId")
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input name="AuthorName" type="text" class="form-control" placeholder="İsim" required />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input name="AutherName" type="email" class="form-control" placeholder="E-mail" required />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <textarea name="Content" class="form-control" rows="3" placeholder="Yorumunuz.." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary comment-submit">Gönder</button>
+        </form>
+    </div>
+</div>
+
+
+@if (Model.Comments.Count == 0)
+{
+    <div class="card mb-3">
+        <div class="card-header">
+            <h5> <i class="far fa-comments"></i> Yorumlar</h5>
+        </div>
+        <div class="card-body">
+            <div class="text-center">
+                Bu yazıya ilk yorumu sen yapmak ister misin ?
+            </div>
+        </div>
+    </div>
+}
+
+@foreach (var comment in Model.Comments)
+{
+    <!-- Comment with nested comments -->
+    <div class="media mb-4">
+        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+        <div class="media-body">
+            <h5 class="mt-0">@comment.AuthorName</h5>
+
+            @comment.Content
+
+            <div class="text-right">
+                <a href="#" class="comment-reply-link" data-comment-id="@comment.Id">Yanıtla</a>
+            </div>
+
+            <div class="comment-reply-form"></div>
+
+            @foreach (var subcomment in comment.Replies)
+            {
+                <div class="media mt-4">
+                    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                    <div class="media-body">
+                        <h5 class="mt-0">Commenter Name</h5>
+                        @subcomment.Content
+                    </div>
+                </div>
+
+            }
+
+
+
+
+        </div>
+    </div>
+}
+
+
+
+@section scripts{
+    <script>
+
+        $(".comment-reply-link").click(function (event) {
+            event.preventDefault();
+
+            $(".comment-reply-form").html("");
+            $(this).parent().next().html($("#commentForm").clone().removeAttr("id"));
+        });
+
+        $('form[name="commentForm"]').submit(function (event) {
+            event.preventDefault();
+            alert("form submit oldu");
+        });
+    </script>
+}

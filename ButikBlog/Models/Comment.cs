@@ -7,37 +7,43 @@ using System.Web;
 
 namespace ButikBlog.Models
 {
-    [Table("Posts")]
-    public class Post
+    [Table("Comments")]
+    public class Comment
     {
         public int Id { get; set; }
 
-        [Required]
+        public int PostId { get; set; }
+
+        [ForeignKey("Parent")]
+        public int? ParentId { get; set; }
+
         [ForeignKey("Author")]
-        [Display(Name = "Yazar")]
         public string AuthorId { get; set; }
 
         [Required]
-        [Display(Name = "Kategori")]
-        public int CategoryId { get; set; }
+        [StringLength(200)]
+        [EmailAddress]
+        public string AuthorEmail { get; set; }
+
+        [StringLength(50)]
+        public string AuthorName { get; set; }
 
         [Required]
-        [StringLength(200)]
-        [Display(Name = "Başlık")]
-        public string Title { get; set; }
-
-        [Display(Name ="İçerik")]
         public string Content { get; set; }
 
         [Required]
         public DateTime? CreationTime { get; set; }
 
+        public virtual Post Posts { get; set; }
 
         public virtual ApplicationUser Author { get; set; }
 
-        public virtual Category Category { get; set; }
+        public virtual Comment Parent { get; set; }
 
-        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Comment> Replies { get; set; }
+
+
+
 
     }
 }
