@@ -1,0 +1,14 @@
+﻿@model Post
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<div class="blog-post">
+    <h2 class="blog-post-title">@Model.Title</h2>
+    <p class="blog-post-meta">@Model.CreationTime <a href="#"> @Model.Author.UserName</a></p>
+
+
+@Html.ShowPost(Model.Content)
+    
+</div><!-- /.blog-post -->
+

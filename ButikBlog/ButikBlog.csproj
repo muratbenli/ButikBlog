@@ -2034,6 +2034,7 @@
     <Content Include="Views\Manage\UploadAvatar.cshtml" />
     <Content Include="Upload\Posts\.gitkeep" />
     <Content Include="Upload\Profiles\.gitkeep" />
+    <Content Include="Views\Home\ShowPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

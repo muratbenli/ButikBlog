@@ -6,52 +6,67 @@
 <h3 class="pb-4 mb-4 font-italic border-bottom">
     @ViewBag.SubTitle
 </h3>
-
+@Html.
 @foreach (var item in Model)
 {
     <div class="blog-post">
-        <h2 class="blog-post-title">@item.Title</h2>
+        <h2 class="blog-post-title">
+            <a href="@Url.Action("ShowPost", "Home", new { id = item.Id })"
+               class="text-reset text-decoration-none">
+                @item.Title
+            </a>
+        </h2>
+
+
+
+
+
         <p class="blog-post-meta">@item.CreationTime <a href="#"> @item.Author.UserName</a></p>
 
-        @Html.Raw(item.Content)
+
+        @Html.ShowPostIntro(item.Content)
+
+        <p>
+            <a href="@Url.Action("ShowPost", "Home", new { id=item.Id})">Devamını Oku</a>
+        </p>
     </div><!-- /.blog-post -->
 }
 
 
 
-    <nav class="blog-pagination">
-        @if (ViewBag.page < ViewBag.pageCount)
-        {
-            <a class="btn btn-outline-primary" href="@Url.Action("Index","Home",new
+<nav class="blog-pagination">
+    @if (ViewBag.page < ViewBag.pageCount)
+    {
+        <a class="btn btn-outline-primary" href="@Url.Action("Index","Home",new
                                         {
                                             cid = ViewBag.cid,
                                             page = ViewBag.nextPage
                                         })">
-                <i class="fas fa-angle-double-left"></i> Daha Eski
-            </a>
-        }
-        else
-        {
-            <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">
-                <i class="fas fa-angle-double-left"></i> Daha Eski
-            </a>
-        }
+            <i class="fas fa-angle-double-left"></i> Daha Eski
+        </a>
+    }
+    else
+    {
+        <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">
+            <i class="fas fa-angle-double-left"></i> Daha Eski
+        </a>
+    }
 
-        @if (ViewBag.page > 1)
-        {
-            <a class="btn btn-outline-primary " href="@Url.Action("Index","Home",new
+    @if (ViewBag.page > 1)
+    {
+        <a class="btn btn-outline-primary " href="@Url.Action("Index","Home",new
                                            {
                                                cid = ViewBag.cid,
                                                page = ViewBag.prevPage
                                            })">
-                Daha Yeni <i class="fas fa-angle-double-right"></i>
-            </a>
+            Daha Yeni <i class="fas fa-angle-double-right"></i>
+        </a>
 
-        }
-        else
-        {
-            <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">
-                Daha Yeni <i class="fas fa-angle-double-right"></i>
-            </a>
-        }
-    </nav>
+    }
+    else
+    {
+        <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">
+            Daha Yeni <i class="fas fa-angle-double-right"></i>
+        </a>
+    }
+</nav>

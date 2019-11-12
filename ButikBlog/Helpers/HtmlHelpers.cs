@@ -43,7 +43,7 @@ namespace ButikBlog.Helpers
             string action = htmlHelper.ActionName();
             Type t = Type.GetType("ButikBlog.Areas.Admin.Controllers." + controller + "Controller");
 
-            MethodInfo mi = t.GetMethods().FirstOrDefault(x=>x.Name == action);
+            MethodInfo mi = t.GetMethods().FirstOrDefault(x => x.Name == action);
 
             BreadcrumbAttribute ba = mi.GetCustomAttribute(typeof(BreadcrumbAttribute)) as BreadcrumbAttribute;
 
@@ -51,6 +51,30 @@ namespace ButikBlog.Helpers
                 return action;
 
             return ba.Name;
+        }
+
+        public static IHtmlString ShowPostIntro(this HtmlHelper htmlHelper, string content)
+        {
+            int pos = content.IndexOf("<hr>");
+
+            if (pos == -1)
+            {
+                return htmlHelper.Raw(content);
+            }
+
+            return htmlHelper.Raw(content.Substring(0, pos));
+        }
+
+        public static IHtmlString ShowPost(this HtmlHelper htmlHelper, string content)
+        {
+            int pos = content.IndexOf("<hr>");
+
+            if (pos == -1)
+            {
+                return htmlHelper.Raw(content);
+            }
+
+            return htmlHelper.Raw(content.Remove(pos, 4));
         }
     }
 }

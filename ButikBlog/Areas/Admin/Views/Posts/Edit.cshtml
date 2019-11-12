@@ -61,15 +61,29 @@
         $(function () {
             //Add text editor
             $('#Content').summernote({
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['fontname', ['fontname']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video', 'hr']],
+                    ['view', ['fullscreen', 'codeview', 'help']],
+                ],
+
+                //https://summernote.org/deep-dive/
+
                 lang: "tr-TR",
                 height: 300,
                 placeholder: "Bir şeyler yazınız..",
+
 
                 // https://stackoverflow.com/questions/21628222/summernote-image-upload
 
                 callbacks: {
                     onImageUpload: function (files) {
-                        uploadFile(files[0]);  
+                        uploadFile(files[0]);
                     }
                 }
             });
@@ -89,7 +103,7 @@
                     processData: false,
                     success: function (data) {
                         $("#Content").summernote("insertImage", data.url);
-                       
+
                         console.log(data);
                     },
                     error: function (data) {
