@@ -24,6 +24,7 @@ namespace ButikBlog
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                        "~/Content/fontawesome-all.css",
+                       "~/Content/toastr.css",
                       "~/Content/Site.css"));
 
             // debug mı release mi kontrol ediyor ona göre cdn kullanılmasına yardımcı oluyor

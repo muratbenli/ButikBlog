@@ -39,7 +39,7 @@
 
             </nav>
         </div>
-       
+
 
         @*<div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
                 <div class="col-md-6 px-0">
@@ -115,11 +115,11 @@
 
     <footer class="blog-footer">
         <p>ButikBlog &copy; @DateTime.Now.Year</p>
-        <p><a href="#">Yukarı Git</a></p>
     </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
     <script>
         //Get the button
         var mybutton = document.getElementById("myBtn");
@@ -141,6 +141,8 @@
             document.documentElement.scrollTop = 0;
         }
     </script>
+
+    <script src="~/Scripts/toastr.js"></script>
     @RenderSection("scripts", false)
 </body>
 </html>

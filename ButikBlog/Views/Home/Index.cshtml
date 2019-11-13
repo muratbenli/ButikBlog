@@ -6,7 +6,7 @@
 <h3 class="pb-4 mb-4 font-italic border-bottom">
     @ViewBag.SubTitle
 </h3>
-@Html.
+
 @foreach (var item in Model)
 {
     <div class="blog-post">
@@ -17,11 +17,17 @@
             </a>
         </h2>
 
+        <p class="blog-post-meta">
+            @item.CreationTime
+            <a href="#">@item.Author.UserName</a>
+            <a href="@Url.Action("ShowPost", "Home", new { id = item.Id })#comments" style="color:#999">
+              
+                @item.Comments.Count Yorum
+            </a>
+        </p>
 
 
 
-
-        <p class="blog-post-meta">@item.CreationTime <a href="#"> @item.Author.UserName</a></p>
 
 
         @Html.ShowPostIntro(item.Content)

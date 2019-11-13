@@ -20,6 +20,7 @@
         <form id="commentForm" name="commentForm">
             @Html.AntiForgeryToken()
             @Html.Hidden("ParentId")
+            @Html.Hidden("PostId", Model.Id)
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -28,7 +29,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input name="AutherName" type="email" class="form-control" placeholder="E-mail" required />
+                        <input name="AuthorEmail" type="email" class="form-control" placeholder="E-mail" required />
                     </div>
                 </div>
             </div>
@@ -40,71 +41,126 @@
     </div>
 </div>
 
+<div class="card mb-3" id="comments">
+    <div class="card-header">
+        <h5> <i class="far fa-comments"></i> Yorumlar</h5>
+    </div>
+    <div class="card-body">
 
-@if (Model.Comments.Count == 0)
-{
-    <div class="card mb-3">
-        <div class="card-header">
-            <h5> <i class="far fa-comments"></i> Yorumlar</h5>
-        </div>
-        <div class="card-body">
+        @if (Model.Comments.Count == 0)
+        {
             <div class="text-center">
                 Bu yazıya ilk yorumu sen yapmak ister misin ?
             </div>
-        </div>
-    </div>
-}
 
-@foreach (var comment in Model.Comments)
-{
-    <!-- Comment with nested comments -->
-    <div class="media mb-4">
-        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-        <div class="media-body">
-            <h5 class="mt-0">@comment.AuthorName</h5>
+        }
 
-            @comment.Content
+        @foreach (var comment in Model.Comments.Where(x => x.ParentId == null))
+        {
+            <!-- Comment with nested comments -->
+            <div class="media mb-4" id="comment-@comment.Id">
+                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                <div class="media-body">
+                    <h5 class="mt-0">@comment.AuthorName</h5>
 
-            <div class="text-right">
-                <a href="#" class="comment-reply-link" data-comment-id="@comment.Id">Yanıtla</a>
-            </div>
-
-            <div class="comment-reply-form"></div>
-
-            @foreach (var subcomment in comment.Replies)
-            {
-                <div class="media mt-4">
-                    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                    <div class="media-body">
-                        <h5 class="mt-0">Commenter Name</h5>
-                        @subcomment.Content
+                    @comment.Content
+                    <hr />
+                    <div class="text-right">
+                        <a href="#" class="comment-reply-link" data-comment-id="@comment.Id">Yanıtla</a>
                     </div>
+
+                    <div class="comment-reply-form"></div>
+
+                    @foreach (var subcomment in comment.Replies)
+                    {
+                        <div class="media mt-1" id="comment-@subcomment.Id">
+                            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                            <div class="media-body">
+                                <h5 class="mt-0">@subcomment.AuthorName</h5>
+                                @subcomment.Content
+                                <hr />
+                            </div>
+                        </div>
+
+                    }
+
                 </div>
-
-            }
-
-
-
-
-        </div>
+            </div>
+        }
     </div>
-}
+</div>
+<style>
+    .comment-highlight {
+        animation: colorchange 4s;
+    }
 
+    @@keyframes colorchange {
+        0% {
+            background-color: #d66be6;
+        }
 
+        100% {
+            background-color: transparent;
+        }
+    }
+</style>
 
 @section scripts{
     <script>
 
-        $(".comment-reply-link").click(function (event) {
-            event.preventDefault();
+        $(function () {
+            if (location.hash && location.hash.startsWith("#comment-")) {
+                var hash = location.hash;
 
-            $(".comment-reply-form").html("");
-            $(this).parent().next().html($("#commentForm").clone().removeAttr("id"));
+                if ($(hash).length) {
+                    $(hash).addClass("comment-highlight");
+                    scrollTo(0, $(hash).offset().top - innerHeight / 2 + 50);
+                }
+            }
+
+
+
+            if (sessionStorage.successMessage) {
+                toastr.success(sessionStorage.successMessage);
+                sessionStorage.removeItem("successMessage");
+            }
         });
 
-        $('form[name="commentForm"]').submit(function (event) {
+        $(".comment-reply-link").click(function (event) {
             event.preventDefault();
-            alert("form submit oldu");
+            var commentId = $(this).data("comment-id");
+
+            $(".comment-reply-form").html("");
+
+            var commentForm = $("#commentForm").clone().removeAttr("id");
+            commentForm.find('input[name="ParentId"]').val(commentId);
+
+            $(this).parent().next().html(commentForm);
+        });
+
+        $('body').on("submit", 'form[name="commentForm"]', function (event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("SendComment","Home")",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (result) {
+                    if (result.Errors) {
+                        toastr.error(result.Errors[0]);
+                    }
+                    else {
+                        sessionStorage.successMessage = "Yorumunuz başarı ile eklendi.";
+                        window.location.hash = "#comment-" + result.Id;
+                        location.reload();
+                    }
+                }
+            });
+
+
         });
     </script>
 }
