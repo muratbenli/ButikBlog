@@ -20,10 +20,7 @@
         <p class="blog-post-meta">
             @item.CreationTime
             <a href="#">@item.Author.UserName</a>
-            <a href="@Url.Action("ShowPost", "Home", new { id = item.Id })#comments" style="color:#999">
-              
-                @item.Comments.Count Yorum
-            </a>
+
         </p>
 
 
@@ -32,9 +29,17 @@
 
         @Html.ShowPostIntro(item.Content)
 
-        <p>
-            <a href="@Url.Action("ShowPost", "Home", new { id=item.Id})">Devamını Oku</a>
-        </p>
+
+        <div class="d-flex small blog-post-meta-footer">
+
+            <a href="@Url.Action("ShowPost", "Home", new { id = item.Id })#comments"
+               class="d-inline-block">
+                <i class="fas fa-comments mr-1"></i> @item.Comments.Count Yorum
+            </a>
+
+
+            <a href="@Url.Action("ShowPost", "Home", new { id=item.Id})" class="ml-auto d-inline-block">Devamını Oku</a>
+        </div>
     </div><!-- /.blog-post -->
 }
 

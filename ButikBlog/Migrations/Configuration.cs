@@ -18,7 +18,13 @@ namespace ButikBlog.Migrations
 
         protected override void Seed(ButikBlog.Models.ApplicationDbContext context)
         {
-            //admin tolünün ve kullanıcısını oluştur ve bu kullanıcıya ait yazılar
+            //tum kullanicilari true yaptık isenabled sonradan eklendigi icin
+            //foreach (var item in context.Users)
+            //{
+            //    item.IsEnabled = true;
+            //}
+            //return;
+
             #region Admin Rolunu ve Kullanicisini Oluştur
 
             if (!context.Roles.Any(r => r.Name == "Admin"))
@@ -37,7 +43,8 @@ namespace ButikBlog.Migrations
                 var user = new ApplicationUser
                 {
                     UserName = "muratbenli001@gmail.com",
-                    Email = "muratbenli001@gmail.com"
+                    Email = "muratbenli001@gmail.com",
+                    
                 };
 
                 manager.Create(user, "Ankara1.");

@@ -174,6 +174,7 @@
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostsController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\DashboardIndexViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\PostEditViewModel.cs" />
     <Compile Include="Attributes\BreadcrumbAttribute.cs" />
     <Compile Include="Attributes\ProfilePhotoAttribute.cs" />
