@@ -34,7 +34,7 @@ namespace ButikBlog.Models
         [Required]
         public DateTime? CreationTime { get; set; }
 
-        public virtual Post Posts { get; set; }
+        public virtual Post Post { get; set; }
 
         public virtual ApplicationUser Author { get; set; }
 

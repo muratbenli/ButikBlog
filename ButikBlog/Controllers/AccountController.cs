@@ -81,9 +81,9 @@ namespace ButikBlog.Controllers
                 case SignInStatus.Success:
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
-                    return View("Kilitle");
+                    return View("Lockout");
                 case SignInStatus.RequiresVerification:
-                    return RedirectToAction("Kod Gönder", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Kullanıcı adı veya parola yanlış!");

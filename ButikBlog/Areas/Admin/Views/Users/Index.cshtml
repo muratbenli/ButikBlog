@@ -1,0 +1,72 @@
+﻿@model List<ApplicationUser>
+@{
+    ViewBag.Title = "Kullanıcılar";
+    ViewBag.HeaderTitle = "Kullanıcılar";
+}
+
+
+<div class="card">
+    <div class="card-body">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Kullanıcı Adı</th>
+                    <th>Aktif Mi?</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>@(i + 1)</td>
+                        <td>@Model[i].UserName</td>
+                        <td>
+                            @Html.CheckBox("IsEnabled", Model[i].IsEnabled,
+                           new {
+                               data_bootstrap_switch = "",
+                               data_off_color = "danger",
+                               data_off_text = "Pasif",
+                               data_on_color = "success",
+                               data_on_text = "Aktif",
+                               data_user_id = Model[i].Id,
+
+                           })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        var table = $(".table").DataTable({
+                order: [[0, "asc"]],
+                language: {
+                    url: "@Url.Content("~/Areas/Admin/plugins/datatables/Turkish.json")"
+                }
+
+            });
+
+        //admin switch'ini disable yap
+        var adminId = "@User.Identity.GetUserId()";
+        $('input:checkbox[data-user-id="' + adminId + '"]').prop("disabled", true);
+
+        $("input[data-bootstrap-switch]").bootstrapSwitch({
+            onSwitchChange: function (event, state) {
+                var userId = $(this).data("user-id");
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("ChangeStatus", "Users")",
+                    data: { UserId: userId, IsEnabled: state },
+                    success: function (result) {
+
+                    }
+                });
+            }
+        });
+    </script>
+}

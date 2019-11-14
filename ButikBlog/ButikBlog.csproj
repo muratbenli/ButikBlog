@@ -172,8 +172,10 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminBaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CommentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Admin\ViewModels\DashboardIndexViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\PostEditViewModel.cs" />
     <Compile Include="Attributes\BreadcrumbAttribute.cs" />
@@ -263,6 +265,8 @@
     <Content Include="Areas\Admin\plugins\bootstrap-switch\css\bootstrap2\bootstrap-switch.min.css" />
     <Content Include="Areas\Admin\plugins\bootstrap-switch\css\bootstrap3\bootstrap-switch.css" />
     <Content Include="Areas\Admin\plugins\bootstrap-switch\css\bootstrap3\bootstrap-switch.min.css" />
+    <Content Include="Areas\Admin\plugins\bootstrap-switch\css\bootstrap4\bootstrap-switch.css" />
+    <Content Include="Areas\Admin\plugins\bootstrap-switch\css\bootstrap4\bootstrap-switch.min.css" />
     <Content Include="Areas\Admin\plugins\bootstrap-switch\js\bootstrap-switch.js" />
     <Content Include="Areas\Admin\plugins\bootstrap-switch\js\bootstrap-switch.min.js" />
     <Content Include="Areas\Admin\plugins\bootstrap4-duallistbox\bootstrap-duallistbox.css" />
@@ -1946,6 +1950,8 @@
     <Content Include="Areas\Admin\Views\Categories\Edit.cshtml" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
+    <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Comments\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome\all.js" />
     <Content Include="Scripts\fontawesome\all.min.js" />

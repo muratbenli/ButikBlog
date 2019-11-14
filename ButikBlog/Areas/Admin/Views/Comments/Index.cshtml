@@ -1,0 +1,49 @@
+﻿@model List<Comment>
+@{
+    ViewBag.Title = "Yorumlar";
+    ViewBag.HeaderTitle = "Yorumlar";
+}
+
+<h2>Yorumlar</h2>
+
+<div class="card">
+    <div class="card-body">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Yazar</th>
+                    <th>Yazı Başlığı</th>
+                    <th>Yorum</th>
+                    <th>Zaman</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.AuthorName</td>
+                        <td>@item.Post.Title</td>
+                        <td>@item.Content</td>
+                        <td>@item.CreationTime</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        var table = $(".table").DataTable({
+                order: [[4, "desc"]],
+                language: {
+                    url: "@Url.Content("~/Areas/Admin/plugins/datatables/Turkish.json")"
+                }
+
+            });
+
+    </script>
+}

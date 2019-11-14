@@ -20,6 +20,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="~/Areas/Admin/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="~/Areas/Admin/dist/css/adminlte.min.css">
+    <!-- Bootstrap switch min style -->
+    <link href="~/Areas/Admin/plugins/bootstrap-switch/css/bootstrap4/bootstrap-switch.min.css" rel="stylesheet" />
     <!-- summernote -->
     <link rel="stylesheet" href="~/Areas/Admin/plugins/summernote/summernote-bs4.css">
     <!-- Toastr -->
@@ -167,7 +169,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <img src="~/Areas/Admin/dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">@User.Identity.Name.Substring(0, 14)...</a>
+                        <a href="@Url.Action("Index","Manage", new { area= ""})" class="d-block">@User.Identity.Name.Substring(0, 14)...</a>
                     </div>
                 </div>
 
@@ -184,7 +186,35 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                         </li>
                         <!-- Add icons to the links using the .nav-icon class
-                        with font-awesome or any other icon font library -->
+    with font-awesome or any other icon font library -->
+
+
+
+                        <li class="nav-item has-treeview menu-open">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-th-list"></i>
+                                <p>
+                                    Kategoriler
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("New", "Categories")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Yeni Kategori Ekle</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Categories")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Kategorileri Listele</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+
                         <li class="nav-item has-treeview menu-open">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-feather"></i>
@@ -209,27 +239,41 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </ul>
                         </li>
 
+
                         <li class="nav-item has-treeview menu-open">
                             <a href="#" class="nav-link">
-                                <i class="fas fa-th-list"></i>
+                                <i class="nav-icon fas fa-users"></i>
+
                                 <p>
-                                    Kategoriler
-                                    <i class="right fas fa-angle-left"></i>
+                                    Kullanıcılar
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="@Url.Action("New", "Categories")" class="nav-link">
+                                    <a href="@Url.Action("Index", "Users")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Yeni Kategori Ekle</p>
+                                        <p>Kullanıcıları Listele</p>
                                     </a>
                                 </li>
+
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview menu-open">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-comments"></i>
+
+                                <p>
+                                    Yorumlar
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Categories")" class="nav-link">
+                                    <a href="@Url.Action("Index", "Comments")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Kategorileri Listele</p>
+                                        <p>Yorumları Listele</p>
                                     </a>
                                 </li>
+
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -268,7 +312,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <li class="breadcrumb-item">
                                     <a href="@Url.Action("Index",Html.ControllerName())">
                                         @Html.BreadcrumbControllerName()
-                                        
+
                                     </a>
                                 </li>
                                 <li class="breadcrumb-item active">
@@ -310,6 +354,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
     <!-- ./wrapper -->
     <!-- REQUIRED SCRIPTS -->
+    @* https://github.com/Bttstrp/bootstrap-switch // css //bootstrap 4
+
+    https://github.com/Bttstrp/bootstrap-switch/releases/tag/v3.3.4 // js için *@
     <!-- jQuery -->
     <script src="~/Areas/Admin/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
@@ -324,6 +371,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Summernote -->
     <script src="~/Areas/Admin/plugins/summernote/summernote-bs4.min.js"></script>
     <script src="~/Areas/Admin/plugins/summernote/lang/summernote-tr-TR.js"></script>
+    <!-- Bootstrap Switch -->
+    <script src="~/Areas/Admin/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+
     @RenderSection("scripts", false)
 </body>
 </html>
