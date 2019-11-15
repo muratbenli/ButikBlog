@@ -111,7 +111,7 @@
         $(function () {
             if (location.hash && location.hash.startsWith("#comment-")) {
                 var hash = location.hash;
-
+           
                 if ($(hash).length) {
                     $(hash).addClass("comment-highlight");
                     scrollTo(0, $(hash).offset().top - innerHeight / 2 + 50);

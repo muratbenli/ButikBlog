@@ -1,6 +1,7 @@
 namespace ButikBlog.Migrations
 {
     using ButikBlog.Models;
+    using ButikBlog.Utility;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using System;
@@ -24,6 +25,8 @@ namespace ButikBlog.Migrations
             //    item.IsEnabled = true;
             //}
             //return;
+            var autoGenerateSlugs = true;
+            var autoGenerateSlugsAll = true;
 
             #region Admin Rolunu ve Kullanicisini Oluþtur
 
@@ -44,7 +47,7 @@ namespace ButikBlog.Migrations
                 {
                     UserName = "muratbenli001@gmail.com",
                     Email = "muratbenli001@gmail.com",
-                    
+
                 };
 
                 manager.Create(user, "Ankara1.");
@@ -162,6 +165,29 @@ namespace ButikBlog.Migrations
             }
             #endregion
 
+
+            #region Mevcut Kategori ve yazilarin sluglarini olustur
+
+            if (autoGenerateSlugs)
+            {
+                foreach (var item in context.Categories)
+                {
+                    if (autoGenerateSlugsAll || string.IsNullOrEmpty(item.Slug))
+                    {
+                        item.Slug = UrlService.URLFriendly(item.CategoryName);
+                    }
+                }
+
+                foreach (var item in context.Posts)
+                {
+                    if (autoGenerateSlugsAll || string.IsNullOrEmpty(item.Slug))
+                    {
+                        item.Slug = UrlService.URLFriendly(item.Title);
+                    }
+                }
+            }
+
+            #endregion
         }
     }
 }

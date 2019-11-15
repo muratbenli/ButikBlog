@@ -26,7 +26,11 @@ namespace ButikBlog.Models
         [Display(Name = "Başlık")]
         public string Title { get; set; }
 
-        [Display(Name ="İçerik")]
+        [Display(Name ="Url")]
+        [StringLength(200)]
+        public string Slug { get; set; }
+
+        [Display(Name = "İçerik")]
         public string Content { get; set; }
 
         [Required]

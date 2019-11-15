@@ -197,6 +197,7 @@
     <Compile Include="Models\Post.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utility\UrlService.cs" />
     <Compile Include="ViewModels\SendCommentViewModel.cs" />
     <Compile Include="ViewModels\UploadAvatarViewModel.cs" />
   </ItemGroup>

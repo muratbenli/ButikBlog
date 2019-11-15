@@ -1,5 +1,7 @@
 ﻿using ButikBlog.Areas.Admin.Controllers;
 using ButikBlog.Attributes;
+using ButikBlog.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,6 +57,11 @@ namespace ButikBlog.Helpers
 
         public static IHtmlString ShowPostIntro(this HtmlHelper htmlHelper, string content)
         {
+            if (string.IsNullOrEmpty(content))
+            {
+                return htmlHelper.Raw("");
+            }
+
             int pos = content.IndexOf("<hr>");
 
             if (pos == -1)
@@ -67,6 +74,11 @@ namespace ButikBlog.Helpers
 
         public static IHtmlString ShowPost(this HtmlHelper htmlHelper, string content)
         {
+            if (string.IsNullOrEmpty(content))
+            {
+                return htmlHelper.Raw("");
+            }
+
             int pos = content.IndexOf("<hr>");
 
             if (pos == -1)
@@ -75,6 +87,30 @@ namespace ButikBlog.Helpers
             }
 
             return htmlHelper.Raw(content.Remove(pos, 4));
+        }
+
+        public static string ProfilePhotoPath(this HtmlHelper htmlHelper)
+        {
+            string userId = htmlHelper.ViewContext.HttpContext.User.Identity.GetUserId();
+
+            var urlHelper = new UrlHelper(htmlHelper.ViewContext.RequestContext, htmlHelper.RouteCollection);
+
+            //giris yapan kullanici varsa 
+            if (userId != null)
+            {
+                using (var db = new ApplicationDbContext())
+                {
+                    var user = db.Users.Find(userId);
+
+                    // fotosu varsa
+                    if (user != null && !string.IsNullOrEmpty(user.Photo))
+                    {
+                        return urlHelper.Content("~/Upload/Profiles/" + user.Photo);
+                    }
+                }
+            }
+
+            return urlHelper.Content("~/Images/avatar.jpg");
         }
     }
 }

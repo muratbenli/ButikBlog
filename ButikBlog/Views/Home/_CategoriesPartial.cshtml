@@ -6,12 +6,12 @@
 
 <ol class="list-unstyled mb-0">
     <li>
-        <a href="@Url.Action("Index","Home")">Tüm Yazılar</a>
+        <a href="@Url.RouteUrl("ActionOnly",new { controller = "Home", action = "Index"})" >Tüm Yazılar</a>
     </li>
 
     @foreach (var item in Model)
     {
-        <li><a href="@Url.Action("Index","Home",new { cid=item.Id})">@item.CategoryName</a></li>
+        <li><a href="@Url.Action("Index","Home",new { cid=item.Id, slug = item.Slug })">@item.CategoryName</a></li>
     }
 
 </ol>

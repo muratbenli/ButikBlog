@@ -166,7 +166,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="~/Areas/Admin/dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">
+                        <img src="@Html.ProfilePhotoPath()" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
                         <a href="@Url.Action("Index","Manage", new { area= ""})" class="d-block">@User.Identity.Name.Substring(0, 14)...</a>

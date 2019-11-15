@@ -12,7 +12,7 @@ namespace ButikBlog.Controllers
     public class HomeController : BaseController
     {
 
-        public ActionResult Index(int? cid, int page = 1)
+        public ActionResult Index(int? cid, string slug, int page = 1)
         {
             int pageSize = 5;
 
@@ -28,6 +28,11 @@ namespace ButikBlog.Controllers
                 if (cat == null)
                 {
                     return HttpNotFound();
+                }
+
+                if (cat.Slug != slug)
+                {
+                    return RedirectToRoute("CategoryRoute", new { cid = cid, slug = cat.Slug, page= page});
                 }
 
                 ViewBag.SubTitle = cat.CategoryName;
@@ -62,7 +67,7 @@ namespace ButikBlog.Controllers
             return PartialView("_CategoriesPartial", db.Categories.ToList());
         }
 
-        public ActionResult ShowPost(int id)
+        public ActionResult ShowPost(int id, string slug)
         {
             Post post = db.Posts.Find(id);
 
@@ -71,6 +76,12 @@ namespace ButikBlog.Controllers
                 return HttpNotFound();
             }
 
+            // eger adresdeki slug veri tabani ile ayni degilse dogrusuna yonlendir
+            if (post.Slug != slug)
+            {
+
+                return RedirectToRoute("PostRoute", new { id = id, slug = post.Slug });
+            }
             return View(post);
         }
 
@@ -97,9 +108,9 @@ namespace ButikBlog.Controllers
                 return Json(comment);
             }
 
-            var errorList = ModelState.Values.SelectMany(m=> m.Errors).Select(e=>e.ErrorMessage).ToList();
+            var errorList = ModelState.Values.SelectMany(m => m.Errors).Select(e => e.ErrorMessage).ToList();
 
-            return Json(new { Errors = errorList});
+            return Json(new { Errors = errorList });
         }
     }
 }
