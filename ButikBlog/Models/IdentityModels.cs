@@ -54,6 +54,12 @@ namespace ButikBlog.Models
 
             //bire çoklu ilişkilerde ilişkili satirlarin silinmesini silen convention ı kaldırdık
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+
+            // Her yorumun zorunlu olarak bir yazisi vardir ve o yazinin da yorumlari vardir yazi silindiginde yorumlarini da otomatik sil
+            modelBuilder.Entity<Comment>()
+                .HasRequired(x => x.Post)
+                .WithMany(x => x.Comments)
+                .WillCascadeOnDelete();
         }
 
         public DbSet<Category> Categories { get; set; }
