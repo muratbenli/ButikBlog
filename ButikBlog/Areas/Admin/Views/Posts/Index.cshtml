@@ -14,12 +14,13 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-       
+
         <table id="example1" class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>#</th>
                     <th>Başlık</th>
+                    <th>Yorum</th>
                     <th>Kategori</th>
                     <th>Yazar</th>
                     <th>Zaman</th>
@@ -32,9 +33,12 @@
                     <tr data-post-id="@item.Id">
                         <td>@item.Id</td>
                         <td>@item.Title</td>
+                        <td>@item.Comments.Count()</td>
                         <td>@item.Category.CategoryName</td>
                         <td>@item.Author.UserName</td>
-                        <td>@item.CreationTime</td>
+                        <td data-sort="@item.CreationTime.Value.ToString("o")">
+                            @item.CreationTime
+                        </td>
                         <td>
                             <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" data-post-title="@item.Title" data-post-id="@item.Id">
                                 <i class="fas fa-trash-alt"></i> Sil
@@ -50,6 +54,7 @@
                 <tr>
                     <th>#</th>
                     <th>Başlık</th>
+                    <th>Yorum</th>
                     <th>Kategori</th>
                     <th>Yazar</th>
                     <th>Zaman</th>
@@ -90,11 +95,15 @@
         $(function () {
 
             var table = $("#example1").DataTable({
-                order: [[4, "desc"]],
+                order: [[5, "desc"]],
                 language: {
                     url: "@Url.Content("~/Areas/Admin/plugins/datatables/Turkish.json")"
-                }
-               
+                },
+                columnDefs: [
+                    { type: 'turkish', targets: 0 },
+                    { type: 'turkish', targets: '_all' }
+                ]
+
             });
 
             //sil modali gozukurken tetiklenen event

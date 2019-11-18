@@ -366,6 +366,7 @@
     <Content Include="Areas\Admin\plugins\datatables-select\js\select.bootstrap4.min.js" />
     <Content Include="Areas\Admin\plugins\datatables\jquery.dataTables.js" />
     <Content Include="Areas\Admin\plugins\datatables\jquery.dataTables.min.js" />
+    <Content Include="Areas\Admin\plugins\datatables\turkish-string.js" />
     <Content Include="Areas\Admin\plugins\daterangepicker\daterangepicker.css" />
     <Content Include="Areas\Admin\plugins\daterangepicker\daterangepicker.js" />
     <Content Include="Areas\Admin\plugins\daterangepicker\drp.png" />
